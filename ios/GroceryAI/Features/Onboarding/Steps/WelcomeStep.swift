@@ -13,14 +13,14 @@ struct WelcomeStep: View {
         StorePlan(
             retailerID: .chedraui,
             retailer: "Chedraui",
-            subtotalCents: 12_880,
-            items: [MockFixtures.milkLine, MockFixtures.riceLine]
+            subtotalCents: 20_650,
+            items: [MockFixtures.milkLine, MockFixtures.eggsLine, MockFixtures.riceLine]
         ),
         StorePlan(
             retailerID: .bodegaAurrera,
             retailer: "Bodega Aurrera",
-            subtotalCents: 7_190,
-            items: [MockFixtures.eggsLine]
+            subtotalCents: 19_990,
+            items: [MockFixtures.milkLine, MockFixtures.eggsLine, MockFixtures.riceLine]
         ),
         StorePlan(
             retailerID: .walmart,
@@ -79,7 +79,7 @@ struct WelcomeStep: View {
 
             VStack(spacing: AppSpacing.small) {
                 Text("Tu súper, al mejor precio.")
-                    .font(AppTypography.screenTitle.bold())
+                    .font(.title.weight(.semibold))
                     .foregroundStyle(colors.textPrimary)
                     .multilineTextAlignment(.center)
                 Text("Escribe tu lista y Barasu compara Walmart, Bodega Aurrera y Chedraui por ti.")
@@ -143,6 +143,9 @@ struct WelcomeStep: View {
                         ForEach(sortedStores) { store in
                             storeRow(store)
                         }
+                        Text("Ejemplo con precios ilustrativos")
+                            .font(.caption)
+                            .foregroundStyle(colors.textSecondary)
                     }
                 }
                 .transition(reduceMotion ? .opacity : .move(edge: .bottom).combined(with: .opacity))

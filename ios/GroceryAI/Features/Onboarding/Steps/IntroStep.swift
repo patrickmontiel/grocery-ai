@@ -31,9 +31,9 @@ struct IntroStep: View {
             VStack(alignment: .leading, spacing: AppSpacing.section) {
                 VStack(alignment: .leading, spacing: AppSpacing.small) {
                     Text("Armemos tu plan de ahorro")
-                        .font(.largeTitle.weight(.semibold))
+                        .font(.title.weight(.semibold))
                         .foregroundStyle(colors.textPrimary)
-                    Text("10 preguntas rápidas, unos 2 minutos")
+                    Text("\(OnboardingStep.questionSteps.count) preguntas rápidas, unos 2 minutos")
                         .font(AppTypography.body)
                         .foregroundStyle(colors.textSecondary)
                 }
