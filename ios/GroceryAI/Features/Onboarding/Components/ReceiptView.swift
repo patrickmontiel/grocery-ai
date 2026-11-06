@@ -39,11 +39,16 @@ struct ReceiptView: View {
                     }
                 }
                 if let totalPrice {
-                    HStack {
+                    let totalLayout = dynamicTypeSize.isAccessibilitySize
+                        ? AnyLayout(VStackLayout(alignment: .leading, spacing: AppSpacing.extraSmall))
+                        : AnyLayout(HStackLayout())
+                    totalLayout {
                         Text(totalLabel ?? "Total")
                             .font(.subheadline.weight(.semibold))
                             .foregroundStyle(colors.textPrimary)
-                        Spacer()
+                        if !dynamicTypeSize.isAccessibilitySize {
+                            Spacer()
+                        }
                         Text(totalPrice)
                             .font(.title3.weight(.semibold))
                             .fontDesign(.rounded)
@@ -131,6 +136,7 @@ struct ReceiptView: View {
                         .foregroundStyle(colors.textSecondary)
                 }
             }
+            .layoutPriority(1)
             if !dynamicTypeSize.isAccessibilitySize {
                 Spacer(minLength: AppSpacing.small)
             }
@@ -139,7 +145,8 @@ struct ReceiptView: View {
                 .fontDesign(.rounded)
                 .monospacedDigit()
                 .foregroundStyle(line.priceIsSuccess ? stampColor : colors.textPrimary)
-                .fixedSize()
+                .multilineTextAlignment(dynamicTypeSize.isAccessibilitySize ? .leading : .trailing)
+                .fixedSize(horizontal: !dynamicTypeSize.isAccessibilitySize && line.price.count <= 12, vertical: true)
         }
         .accessibilityElement(children: .combine)
     }
